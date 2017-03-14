@@ -6,17 +6,25 @@ mongoose.Promise = global.Promise;
 var DestinationSchema = new Schema({
   created_at: Date,
   updated_at: Date,
-  airport_codes: Array,
   description: String,
-  places_id: String
+  places_id: String,
+  skyscanner_id: String,
+  location: {
+    type: [Number],
+    index: '2d'
+  }
 });
 
 var AlreadyBeenSchema = new Schema({
   created_at: Date,
   updated_at: Date,
-  airport_codes: Array,
   description: String,
-  places_id: Number
+  places_id: String,
+  skyscanner_id: String,
+  location: {
+    type: [Number],
+    index: '2d'
+  }
 });
 
 var UserSchema = new Schema({

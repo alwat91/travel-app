@@ -38,3 +38,5 @@ places_id: "Number"
 ```
 potential_ids: Array
 ```
+
+Special thanks to http://blog.robertonodi.me/how-to-use-geospatial-indexing-in-mongodb-using-express-and-mongoose/
