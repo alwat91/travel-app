@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 mongoose.Promise = global.Promise;
 
-var DestinationSchema = new Schema({
+var CitySchema = new Schema({
   created_at: Date,
   updated_at: Date,
   description: String,
@@ -15,25 +15,19 @@ var DestinationSchema = new Schema({
   }
 });
 
-var AlreadyBeenSchema = new Schema({
+var ListSchema = new Schema({
   created_at: Date,
   updated_at: Date,
-  description: String,
-  places_id: String,
-  skyscanner_id: String,
-  location: {
-    type: [Number],
-    index: '2d'
-  }
-});
+  cities: [CitySchema]
+})
 
 var UserSchema = new Schema({
   email: String,
   password_digest: String,
   created_at: Date,
   updated_at: Date,
-  destinations: [DestinationSchema],
-  already_been: [AlreadyBeenSchema]
+  destinations: [ListSchema],
+  already_been: [ListSchema]
 });
 
 function dateHelper(next){
@@ -46,16 +40,16 @@ function dateHelper(next){
   next();
 }
 
-DestinationSchema.pre('save', dateHelper);
-AlreadyBeenSchema.pre('save', dateHelper);
+CitySchema.pre('save', dateHelper);
+ListSchema.pre('save', dateHelper);
 UserSchema.pre('save', dateHelper);
 
-var AlreadyBeenModel = mongoose.model('AlreadyBeen', AlreadyBeenSchema);
-var DestinationModel = mongoose.model('Destination', DestinationSchema);
+var CityModel = mongoose.model('City', CitySchema);
+var ListModel = mongoose.model('List', ListSchema);
 var UserModel = mongoose.model('User', UserSchema);
 
 module.exports = {
-  AlreadyBeen: AlreadyBeenModel,
-  Destination: DestinationModel,
+  City: CityModel,
+  List: ListModel,
   User: UserModel
 }

@@ -45,3 +45,17 @@ user1.save(function(err){
   }
   console.log("User created!");
 })
+
+nyc.save(function(err){
+  if (err) {
+    console.log(err);
+  }
+  console.log("NYC created!");
+})
+
+dc.save(function(err){
+  if (err) {
+    console.log(err);
+  }
+  console.log("DC created!");
+})

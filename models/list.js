@@ -1,5 +1,5 @@
 var Schema = require('../db/schema');
 var mongoose = require('mongoose');
 
-var AlreadyBeen = Schema.AlreadyBeen;
-module.exports = AlreadyBeen;
+var List = Schema.List;
+module.exports = List;
