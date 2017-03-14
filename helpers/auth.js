@@ -8,6 +8,7 @@ function createSecure(req, res, next){
 }
 
 function loginUser(req, res, next) {
+  console.log('session', req);
   User.findOne({ email: req.body.email })
     .then(function(user){
       if(user == null) {

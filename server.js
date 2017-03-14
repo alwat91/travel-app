@@ -21,7 +21,7 @@ app.use('/sessions', sessionsController);
 // Secret
 app.use(session({
   secret: "derpderpderpcats",
-  resave: true,
+  resave: false,
   saveUninitialized: false
 }))
 // Listen for requests
