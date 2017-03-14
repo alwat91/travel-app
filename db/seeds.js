@@ -18,13 +18,17 @@ User.remove({}, function(err){
 });
 
 var nyc = new Destination({
-  airport_codes: ['JFK', 'LGA'],
   description: "New York, New York",
-  places_id: "ChIJOwg_06VPwokRYv534QaPC8g"
+  places_id: "ChIJOwg_06VPwokRYv534QaPC8g",
+  skyscanner_id: "NYCA-sky",
+  location: [40.7128, -74.0059]
 });
 
 var dc = new AlreadyBeen({
-  airport_codes: ['DCA', 'IAD', 'BWI']
+  description: "Washington, D.C.",
+  skyscanner_id: "WASA-sky",
+  places_id: "ChIJW-T2Wt7Gt4kRKl2I1CJFUsI",
+  location: [38.9072, -77.0369]
 })
 
 var user1 = new User({
