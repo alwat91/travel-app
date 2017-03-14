@@ -18,11 +18,13 @@ app.use(logger('dev'));
 // Controllers
 app.use('/users', usersController);
 app.use('/sessions', sessionsController);
-// Secret
+// Sessions
+app.set('trust proxy', 1)
 app.use(session({
   secret: "derpderpderpcats",
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { secure: false }
 }))
 // Listen for requests
 app.listen(process.env.PORT || 3000, function() {

@@ -15,10 +15,9 @@ function loginUser(req, res, next) {
         res.json({status: 401, data: "unauthorized"});
       }
       else if(bcrypt.compareSync(req.body.password, user.password_digest)){
-        console.log('user', user);
         req.session.currentUser = user;
+        next();
       }
-      next();
     });
 }
 
