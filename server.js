@@ -15,17 +15,15 @@ mongoose.connect(mongoURI);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev'));
+// Sessions
+app.use(session({
+  secret: "derpderpderpcats",
+  resave: true,
+  saveUninitialized: false
+}))
 // Controllers
 app.use('/users', usersController);
 app.use('/sessions', sessionsController);
-// Sessions
-app.set('trust proxy', 1)
-app.use(session({
-  secret: "derpderpderpcats",
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false }
-}))
 // Listen for requests
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on 3000');
