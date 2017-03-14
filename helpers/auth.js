@@ -2,7 +2,9 @@ var User = require('../models/user.js');
 var bcrypt = require('bcrypt');
 
 function createSecure(req, res, next){
+  console.log(req.body);
   res.hashedPassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
+  next();
 }
 
 function loginUser(req, res, next) {
