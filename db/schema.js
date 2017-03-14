@@ -16,6 +16,7 @@ var CitySchema = new Schema({
 });
 
 var ListSchema = new Schema({
+  description: String,
   created_at: Date,
   updated_at: Date,
   cities: [CitySchema]

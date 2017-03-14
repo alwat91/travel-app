@@ -33,6 +33,7 @@ var dc = new City({
 })
 
 var list = new List({
+  description: "Murica",
   cities: [dc, nyc]
 })
 
