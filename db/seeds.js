@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/travel-app');
+var bcrypt = require('bcrypt');
 
 var AlreadyBeen = require('../models/already_been');
 var Destination = require('../models/destination');
@@ -33,7 +34,7 @@ var dc = new AlreadyBeen({
 
 var user1 = new User({
   email: "a@a.com",
-  password_digest: "a",
+  password_digest: bcrypt.hashSync("a", bcrypt.genSaltSync(10)),
   destinations: [nyc],
   already_been: [dc]
 })

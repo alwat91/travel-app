@@ -11,10 +11,12 @@ angular.module('travelApp', ['ui.router'])
     })
     .state('login', {
       url: '/login',
-      templateUrl: '/partials/login.html'
+      templateUrl: '/partials/login.html',
+      controller: 'AuthController as auth'
     })
     .state('sign_up', {
       url: '/sign_up',
-      templateUrl: '/partials/sign_up.html'
+      templateUrl: '/partials/sign_up.html',
+      controller: 'AuthController as auth'
     })
   }

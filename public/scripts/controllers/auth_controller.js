@@ -12,7 +12,8 @@ function AuthController($scope, $http, $state){
   function login(user) {
     $http.post('/sessions/login', user)
       .then(function(res){
-        $scope.$emit('userLoggedIn')
+        console.log(res.data);
+        $scope.$emit('userLoggedIn', res.data.data)
         $state.go('index');
     })
   }

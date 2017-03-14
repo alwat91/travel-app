@@ -16,7 +16,11 @@
   </head>
   <body ng-controller="HomeController as home">
     <div ng-controller="AuthController as auth">
-      {{2+2}}
+      <ul>
+        <li ui-sref="login">Login</li>
+        <li ui-sref="sign_up">Sign Up</li>
+        <li>Logout</li>
+      </ul>
     </div>
 
     <ui-view>
