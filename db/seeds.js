@@ -1,3 +1,4 @@
+require('dotenv').config();
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/travel-app');
 var bcrypt = require('bcrypt');
@@ -5,6 +6,8 @@ var bcrypt = require('bcrypt');
 var City = require('../models/city');
 var List = require('../models/list');
 var User = require('../models/user');
+
+console.log(process.env.PLACES_KEY);
 
 City.remove({}, function(err){
   console.log(err);
@@ -28,7 +31,7 @@ cities.forEach(function(name){
   city = new City({
     description: name
   });
-  
+
 })
 
 var nyc = new City({
