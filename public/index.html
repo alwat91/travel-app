@@ -17,9 +17,9 @@
   <body ng-controller="HomeController as home">
     <div ng-controller="AuthController as auth">
       <ul>
-        <li ui-sref="login">Login</li>
-        <li ui-sref="sign_up">Sign Up</li>
-        <li>Logout</li>
+        <li ng-if="!home.currentUser" ui-sref="login">Login</li>
+        <li ng-if="!home.currentUser" ui-sref="sign_up">Sign Up</li>
+        <li ng-if="home.currentUser" ng-click="auth.logout()">Logout</li>
       </ul>
     </div>
 
