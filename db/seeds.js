@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/travel-app');
@@ -33,7 +33,7 @@ cities.forEach(function(name){
   city = new City({
     description: name
   });
-  console.log(get.getSkyscanner(name));
+  get.getSkyscanner(name)
 })
 
 var nyc = new City({
