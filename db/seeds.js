@@ -11,8 +11,6 @@ var City = require('../models/city');
 var List = require('../models/list');
 var User = require('../models/user');
 
-console.log(process.env.PLACES_KEY);
-
 City.remove({}, function(err){
   console.log(err);
 });
@@ -48,19 +46,27 @@ function getSkyscanner(city){
     else {
       console.log(response.body);
     }
-
-    city.save(function(err){
-      if (err) {
-        console.log(err);
-      }
-      else {
-        console.log(city);
-      }
-    })
+    getPlaces(city);
   })
   .catch(function(res){
     console.log(res);
   });
+}
+
+function getPlaces(city){
+  client.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?type=city&query=${city.description}&key=${process.env.PLACES_KEY}`)
+  .then(function(res){
+    console.log(city.description, res.body.results[0].place_id);
+    city.places_id = res.body.results[0].place_id;
+    getMaps(city);
+  })
+  .catch(function(res){
+    console.log(res);
+  });
+}
+
+function getMaps(city){
+  console.log(city);
 }
 
 var nyc = new City({
