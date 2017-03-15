@@ -56,8 +56,8 @@ function getSkyscanner(city){
 function getPlaces(city){
   client.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?type=city&query=${city.description}&key=${process.env.PLACES_KEY}`)
   .then(function(res){
-    console.log(city.description, res.body.results[0].place_id);
     city.places_id = res.body.results[0].place_id;
+    city.location = [res.body.results[0].geometry.location.lat, res.body.results[0].geometry.location.lng];
     getMaps(city);
   })
   .catch(function(res){
