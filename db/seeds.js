@@ -1,4 +1,6 @@
-// require('dotenv').config();
+require('dotenv').config();
+var request = require('request-json');
+var client = request.createClient('http://localhost:8888/');
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/travel-app');
@@ -29,17 +31,37 @@ var list2 = new List({
   description: "Top 10"
 })
 
-get.getSkyscanner('Atlanta')
+cities.forEach(function(name){
+  city = new City({
+    description: name
+  });
+  getSkyscanner(city)
+})
 
-// cities.forEach(function(name){
-//   city = new City({
-//     description: name
-//   });
-//   get.getSkyscanner(name)
-//   .then(function(cityId){
-//     console.log(name, cityId);
-//   })
-// })
+
+function getSkyscanner(city){
+  client.get(`http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US/?query=${city.description}&apiKey=${process.env.SKYSCANNER_KEY}`)
+  .then(function(response) {
+    if (response.body.Places[0]) {
+      city.skyscanner_id = response.body.Places[0].CityId;
+    }
+    else {
+      console.log(response.body);
+    }
+
+    city.save(function(err){
+      if (err) {
+        console.log(err);
+      }
+      else {
+        console.log(city);
+      }
+    })
+  })
+  .catch(function(res){
+    console.log(res);
+  });
+}
 
 var nyc = new City({
   description: "New York, New York",
