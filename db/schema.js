@@ -28,7 +28,8 @@ var UserSchema = new Schema({
   created_at: Date,
   updated_at: Date,
   destinations: [ListSchema],
-  already_been: [ListSchema]
+  already_been: [ListSchema],
+  preferred_departure: [CitySchema]
 });
 
 function dateHelper(next){
