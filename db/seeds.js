@@ -18,6 +18,19 @@ User.remove({}, function(err){
   console.log(err);
 });
 
+var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK", "Macau, Macau", "Kuala Lumpur, Malaysia", "Shenzhen, China", "New York City, New York", "Antalya, Turkey", "Paris, France"];
+
+var list2 = new List({
+  description: "Top 10"
+})
+
+cities.forEach(function(name){
+  city = new City({
+    description: name
+  });
+  
+})
+
 var nyc = new City({
   description: "New York, New York",
   places_id: "ChIJOwg_06VPwokRYv534QaPC8g",

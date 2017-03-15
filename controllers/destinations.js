@@ -11,13 +11,13 @@ router.get('/', function(req, res){
 })
 
 router.get('/random', function(req, res){
-
-  Destination.find()
-    .exec(function(err, destinations){
+  List.findOne()
+    .exec(function(err, list){
       if (err) {
         console.log(err);
       }
-      res.send(destinations);
+      var city = list.cities[ Math.floor( Math.random() * list.cities.length )];
+      res.json(city);
     })
 
 })
