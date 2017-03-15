@@ -29,12 +29,17 @@ var list2 = new List({
   description: "Top 10"
 })
 
-cities.forEach(function(name){
-  city = new City({
-    description: name
-  });
-  get.getSkyscanner(name)
-})
+get.getSkyscanner('Atlanta')
+
+// cities.forEach(function(name){
+//   city = new City({
+//     description: name
+//   });
+//   get.getSkyscanner(name)
+//   .then(function(cityId){
+//     console.log(name, cityId);
+//   })
+// })
 
 var nyc = new City({
   description: "New York, New York",
