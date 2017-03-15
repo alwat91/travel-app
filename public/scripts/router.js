@@ -19,4 +19,8 @@ angular.module('travelApp', ['ui.router'])
       templateUrl: '/partials/sign_up.html',
       controller: 'AuthController as auth'
     })
+    .state('preferences', {
+      url: '/preferences',
+      templateUrl: '/partials/preferences.html'
+    })
   }

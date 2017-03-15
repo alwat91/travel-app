@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(logger('dev'));
 // Sessions
 app.use(session({
-  secret: "derpderpderpcats",
+  secret: process.env.SECRET,
   resave: true,
   saveUninitialized: false
 }))

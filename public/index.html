@@ -20,6 +20,7 @@
         <li ng-if="!home.currentUser" ui-sref="login">Login</li>
         <li ng-if="!home.currentUser" ui-sref="sign_up">Sign Up</li>
         <li ng-if="home.currentUser" ng-click="auth.logout()">Logout</li>
+        <li ui-sref="preferences">Preferences</li>
       </ul>
     </div>
 
