@@ -1,7 +1,9 @@
 require('dotenv').config();
+
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/travel-app');
 var bcrypt = require('bcrypt');
+var get = require('../helpers/req.js')
 
 var City = require('../models/city');
 var List = require('../models/list');
@@ -31,7 +33,7 @@ cities.forEach(function(name){
   city = new City({
     description: name
   });
-
+  console.log(get.getSkyscanner(name));
 })
 
 var nyc = new City({
