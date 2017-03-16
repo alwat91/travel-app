@@ -12,6 +12,7 @@ router.get('/random', function(req, res){
         console.log(err);
       }
       var city = list.cities[ Math.floor( Math.random() * list.cities.length )];
+
       res.json(city);
     })
 })

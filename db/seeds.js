@@ -39,7 +39,7 @@ user1.save(function(err){
 // Cities to create for final seed
 // var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK", "Macau, Macau", "Kuala Lumpur, Malaysia", "Shenzhen, China", "New York City, New York", "Antalya, Turkey", "Paris, France"];
 // Less cities for testing. Use this to minimize api requests
-var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK"];
+var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London"];
 // list to create
 var list = new List({
   description: "Top 10"
@@ -62,7 +62,7 @@ function getSkyscanner(city){
     // check to see if the expected response is given
     if (response.body.Places[0]) {
       // set the skyscanner_id
-      city.skyscanner_id = response.body.Places[0].CityId;
+      city.skyscanner_id = response.body.Places[0].CityId.slice(0, -4);
     }
     else {
       console.log(response.body);
@@ -82,7 +82,7 @@ function getPlaces(city){
       // check to see if the results are as expected
       if(res.body.results){
         // set the places_id of the city
-        city.places_id = res.body.results[0].place_id;
+        city.places_id = res.body.results[0].photos[0].photo_reference;
         // get the location of the city
         city.location = [res.body.results[0].geometry.location.lat, res.body.results[0].geometry.location.lng];
         // save the city

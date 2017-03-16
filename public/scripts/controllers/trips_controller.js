@@ -16,8 +16,16 @@ function TripsController($http, $state){
     $http.get('/destinations/random')
     .then(function(res){
       self.destination = res.data;
+      getPrice();
     })
-
   }
   self.randomTrip = randomTrip
+
+  function getPrice(){
+    $http.get(`/trips/${self.origin.skyscanner_id}/${self.destination.skyscanner_id}`)
+    .then(function(res){
+      console.log(res.data);
+      self.lowestQuote = res.data;
+    })
+  }
 }
