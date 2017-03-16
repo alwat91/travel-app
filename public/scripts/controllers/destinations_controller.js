@@ -12,7 +12,12 @@ function DestinationsController($http, $state){
 
   function randomTrip(origin){
     self.origin = JSON.parse(origin);
-    
+
+    $http.get('/destinations/random')
+    .then(function(res){
+      self.destination = res.data;
+    })
+
   }
   self.randomTrip = randomTrip
 }
