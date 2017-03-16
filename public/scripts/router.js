@@ -7,7 +7,9 @@ angular.module('travelApp', ['ui.router'])
 
     $stateProvider
     .state('index', {
-      url: '/'
+      url: '/',
+      templateUrl: '/partials/home.html',
+      controller: 'DestinationsController as destinations'
     })
     .state('login', {
       url: '/login',
