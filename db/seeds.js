@@ -29,8 +29,17 @@ var user1 = new User({
   destinations: list,
   already_been: list
 })
-// cities to create
-var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK", "Macau, Macau", "Kuala Lumpur, Malaysia", "Shenzhen, China", "New York City, New York", "Antalya, Turkey", "Paris, France"];
+
+user1.save(function(err){
+  if (err) {
+    console.log(err);
+  }
+  console.log("User created!");
+})
+// Cities to create for final seed
+// var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK", "Macau, Macau", "Kuala Lumpur, Malaysia", "Shenzhen, China", "New York City, New York", "Antalya, Turkey", "Paris, France"];
+// Less cities for testing. Use this to minimize api requests
+var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK"];
 // list to create
 var list = new List({
   description: "Top 10"
@@ -79,11 +88,10 @@ function getPlaces(city){
         // save the city
         city.save(function(res){
           console.log(city, "created");
+          // push the city to the list
           list.cities.push(city);
-          // if all the cities have been saved, continue and save the users and the lists
-          if (list.cities.length = cities.length) {
-            saveAll();
-          }
+          // save the list
+          saveList();
         })
       }
       else {
@@ -96,20 +104,11 @@ function getPlaces(city){
 }
 
 
-function saveAll(){
-
-  user1.save(function(err){
-    if (err) {
-      console.log(err);
-    }
-    console.log("User created!");
-  })
-
+function saveList(){
   list.save(function(err){
     if (err) {
       console.log(err);
     }
     console.log("List created!");
   })
-
 }
