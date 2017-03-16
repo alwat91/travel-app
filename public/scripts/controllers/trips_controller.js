@@ -1,4 +1,4 @@
-function DestinationsController($http, $state){
+function TripsController($http, $state){
   var self = this;
 
   function getCities(){

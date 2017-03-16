@@ -9,7 +9,7 @@ angular.module('travelApp', ['ui.router'])
     .state('index', {
       url: '/',
       templateUrl: '/partials/home.html',
-      controller: 'DestinationsController as destinations'
+      controller: 'TripsController as trips'
     })
     .state('login', {
       url: '/login',
