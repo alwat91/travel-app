@@ -16,34 +16,14 @@ var User = require('../models/user');
 City.remove({}, function(err){
   console.log(err);
 });
-List.remove({}, function(err){
-  console.log(err);
-});
-User.remove({}, function(err){
-  console.log(err);
-});
-// create new user
-var user1 = new User({
-  email: "a@a.com",
-  password_digest: bcrypt.hashSync("a", bcrypt.genSaltSync(10)),
-  destinations: list,
-  already_been: list
-})
 
-user1.save(function(err){
-  if (err) {
-    console.log(err);
-  }
-  console.log("User created!");
-})
+
+
 // Cities to create for final seed
-// var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK", "Macau, Macau", "Kuala Lumpur, Malaysia", "Shenzhen, China", "New York City, New York", "Antalya, Turkey", "Paris, France"];
+var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK", "Macau, Macau", "Kuala Lumpur, Malaysia", "Shenzhen, China", "New York City, New York", "Antalya, Turkey", "Paris, France"];
 // Less cities for testing. Use this to minimize api requests
-var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London"];
-// list to create
-var list = new List({
-  description: "Top 10"
-})
+// var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London"];
+
 // loop through cities
 cities.forEach(function(name){
   // create city object
@@ -89,9 +69,6 @@ function getPlaces(city){
         city.save(function(res){
           console.log(city, "created");
           // push the city to the list
-          list.cities.push(city);
-          // save the list
-          saveList();
         })
       }
       else {
@@ -101,14 +78,4 @@ function getPlaces(city){
   .catch(function(res){
     console.log(res);
   });
-}
-
-
-function saveList(){
-  list.save(function(err){
-    if (err) {
-      console.log(err);
-    }
-    console.log("List created!");
-  })
 }

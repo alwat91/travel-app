@@ -7,11 +7,12 @@ var User = require('../models/user.js');
 
 router.get('/random', function(req, res){
   List.findOne()
+    .populate('_cities')
     .exec(function(err, list){
       if (err) {
         console.log(err);
       }
-      var city = list.cities[ Math.floor( Math.random() * list.cities.length )];
+      var city = list._cities[ Math.floor( Math.random() * list._cities.length )];
 
       res.json(city);
     })
@@ -19,6 +20,7 @@ router.get('/random', function(req, res){
 
 router.get('/', function(req, res){
   List.findOne()
+    .populate('_cities')
     .exec(function(err, list){
       if(err) {
         console.log(err);

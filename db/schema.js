@@ -19,7 +19,7 @@ var ListSchema = new Schema({
   description: String,
   created_at: Date,
   updated_at: Date,
-  cities: [CitySchema]
+  _cities: [{type: Schema.Types.ObjectId, ref: 'City'}]
 })
 
 var UserSchema = new Schema({

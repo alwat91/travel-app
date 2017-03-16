@@ -4,7 +4,7 @@ function TripsController($http, $state){
   function getCities(){
     $http.get('/destinations')
     .then(function(res){
-      self.cities = res.data.cities;
+      self.cities = res.data._cities;
     })
   }
   getCities();
