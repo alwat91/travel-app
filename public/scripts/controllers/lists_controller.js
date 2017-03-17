@@ -18,4 +18,20 @@ function ListsController($http){
       })
   }
   self.removeCity = removeCity
+
+  function editCity(city){
+    console.log(city._id);
+    $http.put(`/cities/${city._id}`, city)
+      .then(function(res){
+        console.log(res);
+        city = res.data;
+        city.showEdit = false;
+      })
+  }
+  self.editCity = editCity;
+
+  function addCity(list){
+    console.log(list);
+  }
+  self.addCity = addCity;
 }

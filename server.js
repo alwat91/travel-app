@@ -10,6 +10,7 @@ var sessionsController = require('./controllers/sessions.js');
 var destinationsController = require('./controllers/destinations.js')
 var tripsController = require('./controllers/trips.js')
 var listsController = require('./controllers/lists.js')
+var citiesController = require('./controllers/cities.js')
 // Access public directory
 app.use(express.static('public'));
 // Connect to db
@@ -31,6 +32,7 @@ app.use('/sessions', sessionsController);
 app.use('/destinations', destinationsController);
 app.use('/trips', tripsController);
 app.use('/lists', listsController);
+app.use('/cities', citiesController);
 // Listen for requests
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on 3000');

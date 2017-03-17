@@ -5,8 +5,17 @@
     </select>
   </form>
   <ul>
-    <li ng-repeat="city in lists.selectedList._cities">{{city.description}}
+    <li ng-repeat="city in lists.selectedList._cities">
+      <span ng-if="!city.showEdit">{{city.description}}</span>
+      <form ng-if="city.showEdit" ng-submit="lists.editCity(city)">
+        <label for="update_city">Enter the updated city name: </label>
+        <input type="text" ng-model="city.description" name="update_city">
+        <input type="submit" name="submit" value="submit" ng-click="city.showEdit = false">
+      </form>
+      <button type="button" ng-if="!city.showEdit" ng-click="city.showEdit = true">Edit City</button>
+      <button type="button" ng-if="city.showEdit" ng-click="city.showEdit = false">Cancel Editing</button>
       <button type="button" ng-click="lists.removeCity(city, lists.selectedList)">Remove city from list</button>
     </li>
   </ul>
+  <button type="button" ng-click="lists.addCity(lists.selectedList)">Add a city</button>
 </div>
