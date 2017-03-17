@@ -1,3 +1,10 @@
 <div ng-controller="ListsController as lists">
-
+  <form>
+    <label for="departure_list">Select a list to choose from:</label>
+    <select name="departure_list" ng-model="lists.selectedList" ng-options="list.description for list in lists.allLists">
+    </select>
+  </form>
+  <ul>
+    <li ng-repeat="city in lists.selectedList._cities">{{city.description}}</li>
+  </ul>
 </div>
