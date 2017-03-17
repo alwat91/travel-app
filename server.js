@@ -9,6 +9,7 @@ var usersController = require('./controllers/users.js');
 var sessionsController = require('./controllers/sessions.js');
 var destinationsController = require('./controllers/destinations.js')
 var tripsController = require('./controllers/trips.js')
+var listsController = require('./controllers/lists.js')
 // Access public directory
 app.use(express.static('public'));
 // Connect to db
@@ -29,6 +30,7 @@ app.use('/users', usersController);
 app.use('/sessions', sessionsController);
 app.use('/destinations', destinationsController);
 app.use('/trips', tripsController);
+app.use('/lists', listsController);
 // Listen for requests
 app.listen(process.env.PORT || 3000, function() {
   console.log('listening on 3000');
