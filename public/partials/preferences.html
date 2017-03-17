@@ -5,6 +5,8 @@
     </select>
   </form>
   <ul>
-    <li ng-repeat="city in lists.selectedList._cities">{{city.description}}</li>
+    <li ng-repeat="city in lists.selectedList._cities">{{city.description}}
+      <button type="button" ng-click="lists.removeCity(city, lists.selectedList)">Remove city from list</button>
+    </li>
   </ul>
 </div>

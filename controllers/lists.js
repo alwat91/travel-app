@@ -11,6 +11,21 @@ router.get('/', function(req, res){
   .exec(function(err, lists){
     res.json(lists);
   })
+});
+
+router.delete('/:listId/:cityId', function(req, res){
+  List.findById(req.params.listId)
+    .exec(function(err, list){
+      if (err) {
+        console.log(err);
+      }
+      console.log(list);
+      var index = list._cities.indexOf(req.params.cityId);
+      list._cities.splice(index, 1);
+      console.log(list);
+      list.save();
+      res.json({status: 200, statusText: "OK"});
+    })
 })
 
 module.exports = router;
