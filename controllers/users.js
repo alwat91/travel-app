@@ -1,6 +1,12 @@
+// access api keys
+require('dotenv').config();
+// set up request-json
+var request = require('request-json');
+var client = request.createClient('http://localhost:8888/');
 var express = require('express');
 var router = express.Router({mergeParams: true});
 var User = require('../models/user.js');
+var City = require('../models/city.js');
 var authHelpers = require('../helpers/auth.js');
 
 router.post('/', authHelpers.createSecure, function(req, res){
@@ -9,12 +15,28 @@ router.post('/', authHelpers.createSecure, function(req, res){
     password_digest: res.hashedPassword
   });
 
-  user.save(function(err, user){
-    if (err) {
-      console.log(err);
+  var city = new City({
+    description: req.body.origin
+  })
+  client.get(`http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US/?query=${city.description}&apiKey=${process.env.SKYSCANNER_KEY}`)
+  .then(function(response) {
+    // check to see if the expected response is given
+    if (response.body.Places[0]) {
+      // set the skyscanner_id
+      city.skyscanner_id = response.body.Places[0].CityId.slice(0, -4);
+      return city;
     }
-    console.log(user);
-    res.json({ status:201, message: "created new user"});
+    else {
+      console.log(response.body);
+    }
+  })
+  .then(function(city){
+    city.save();
+    user.preferred_departure = city;
+    user.save();
+  })
+  .catch(function(err){
+    console.log(err);
   });
 });
 
