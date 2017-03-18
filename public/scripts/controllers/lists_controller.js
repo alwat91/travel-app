@@ -46,4 +46,12 @@ function ListsController($http, $state){
       })
   }
   self.addList = addList;
+
+  function deleteList(list){
+    $http.delete(`/lists/${list._id}`)
+      .then(function(res){
+        self.getAllLists();
+      })
+  }
+  self.deleteList = deleteList;
 }

@@ -4,6 +4,7 @@
     <select name="departure_list" ng-model="lists.selectedList" ng-options="list.description for list in lists.allLists">
     </select>
     <input type="button" name="add_list" value="Add a list" ng-click="lists.showAddList = true">
+    <input type="button" name="remove_list" value="Delete selected list" ng-click="lists.deleteList(lists.selectedList)">
   </form>
   <form ng-if="lists.showAddList" ng-submit="lists.addList(newList)">
     <label for="addList">Enter new list name:</label>

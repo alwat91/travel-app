@@ -18,6 +18,15 @@ router.get('/', function(req, res){
   })
 });
 
+router.post('/', function(req, res){
+  var list = new List(req.body);
+
+  list.save(function(err, list){
+    if(err){ console.log(err); }
+    res.send(list);
+  })
+})
+
 router.delete('/:listId/:cityId', function(req, res){
   List.findById(req.params.listId)
     .exec(function(err, list){
@@ -32,15 +41,6 @@ router.delete('/:listId/:cityId', function(req, res){
       res.json({status: 200, statusText: "OK"});
     })
 });
-
-router.post('/', function(req, res){
-  var list = new List(req.body);
-
-  list.save(function(err, list){
-    if(err){ console.log(err); }
-    res.send(list);
-  })
-})
 
 router.post('/:listId', function(req, res){
   var city = new City({
@@ -68,5 +68,12 @@ router.post('/:listId', function(req, res){
     })
 })
 
+router.delete('/:listId', function(req, res){
+  List.findByIdAndRemove(req.params.listId)
+    .exec(function(err){
+      if(err) { console.log(err); }
+      res.send({status: 200, statusText: "ok"});
+    })
+})
 
 module.exports = router;
