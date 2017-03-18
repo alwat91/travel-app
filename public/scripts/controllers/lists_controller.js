@@ -1,4 +1,4 @@
-function ListsController($http){
+function ListsController($http, $state){
   var self = this;
 
   function getAllLists(){
@@ -33,6 +33,10 @@ function ListsController($http){
   function addCity(city, list){
     console.log(list);
     console.log(city);
+    $http.post(`/lists/${list._id}`, city)
+      .then(function(res){
+        $state.reload();
+      })
   }
   self.addCity = addCity;
 }

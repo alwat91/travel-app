@@ -1,3 +1,8 @@
+// access api keys
+require('dotenv').config();
+// set up request-json
+var request = require('request-json');
+var client = request.createClient('http://localhost:8888/');
 var express = require('express');
 var router = express.Router({ mergeParams: true });
 
@@ -25,6 +30,32 @@ router.delete('/:listId/:cityId', function(req, res){
       console.log(list);
       list.save();
       res.json({status: 200, statusText: "OK"});
+    })
+});
+
+router.post('/:listId', function(req, res){
+  var city = new City({
+    description: req.body.description
+  })
+
+  client.get(`http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US/?query=${city.description}&apiKey=${process.env.SKYSCANNER_KEY}`)
+  .then(function(skyscannerRes){
+    city.skyscanner_id = skyscannerRes.body.Places[0].CityId.slice(0, -4);
+    return city.save();
+  })
+  .then(function(city){
+    List.findById(req.params.listId)
+      .exec(function(err, list){
+        if(err) {console.log(err);}
+        list._cities.push(city._id)
+        list.save(function(err, list){
+          if(err){ console.log(err); }
+          res.json({status: 200, statusText: "OK"})
+        });
+      })
+    })
+    .catch(function(err){
+      console.log(err);
     })
 })
 
