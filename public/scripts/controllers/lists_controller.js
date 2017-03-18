@@ -31,12 +31,19 @@ function ListsController($http, $state){
   self.editCity = editCity;
 
   function addCity(city, list){
-    console.log(list);
-    console.log(city);
     $http.post(`/lists/${list._id}`, city)
       .then(function(res){
         $state.reload();
       })
   }
   self.addCity = addCity;
+
+  function addList(list){
+    $http.post('/lists', list)
+      .then(function(res){
+        self.allLists.push(res.data);
+        self.showAddList = false;
+      })
+  }
+  self.addList = addList;
 }
