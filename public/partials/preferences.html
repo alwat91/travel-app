@@ -17,5 +17,12 @@
       <button type="button" ng-click="lists.removeCity(city, lists.selectedList)">Remove city from list</button>
     </li>
   </ul>
-  <button type="button" ng-click="lists.addCity(lists.selectedList)">Add a city</button>
+  <div ng-if="lists.showAdd">
+    <form ng-submit="lists.addCity(newCity, lists.selectedList)">
+      <label for="new_city">Enter new city name:</label>
+      <input ng-model="newCity.description" type="text" name="new_city">
+      <input type="submit">
+    </form>
+  </div>
+  <button ng-if="lists.selectedList" type="button" ng-click="lists.showAdd = true">Add a city</button>
 </div>

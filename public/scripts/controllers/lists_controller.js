@@ -30,8 +30,9 @@ function ListsController($http){
   }
   self.editCity = editCity;
 
-  function addCity(list){
+  function addCity(city, list){
     console.log(list);
+    console.log(city);
   }
   self.addCity = addCity;
 }
