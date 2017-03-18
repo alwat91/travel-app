@@ -1,10 +1,11 @@
-function ListsController($http, $state){
+function ListsController($http, $state, $scope){
   var self = this;
 
   function getAllLists(){
     $http.get('/lists/')
       .then(function(res){
         self.allLists = res.data;
+        $scope.$emit('gotLists', self.allLists);
       })
   }
   getAllLists();

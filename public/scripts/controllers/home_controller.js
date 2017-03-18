@@ -8,4 +8,8 @@ function HomeController($scope, $http) {
   $scope.$on('userLoggedOut', function(event, data){
     self.currentUser = null;
   })
+
+  $scope.$on('gotLists', function(event, data){
+    self.allLists = data;
+  })
 }

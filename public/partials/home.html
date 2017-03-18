@@ -9,6 +9,10 @@
   </form>
 </div>
 
+<div ng-controller="ListsController as lists">
+  <select ng-model="lists.allLists" ng-options="list.description for list in lists.allLists" name="destination_list"></select>
+</div>
+
 <div ng-if="trips.destination">
   Why don't you go to {{trips.destination.description}}?
   You can find flights for around {{trips.lowestQuote.MinPrice | currency}}
