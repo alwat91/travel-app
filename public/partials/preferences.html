@@ -1,51 +1,70 @@
-<div ng-controller="ListsController as lists" class="container">
+<div ng-controller="ListsController as lists" class="container"><br><br>
   <!-- List select-->
   <form ng-if="!lists.showAddList">
     <label for="departure_list">Select a list to choose from:</label>
-    <select name="departure_list" ng-model="lists.selectedList" ng-options="list.description for list in lists.allLists">
+    <select material-select name="departure_list" ng-model="lists.selectedList" ng-options="list.description for list in lists.allLists">
     </select>
     <!-- Add list button -->
-    <input type="button" name="add_list" value="Add a list" ng-click="lists.showAddList = true">
+    <button type="button" name="add_list" ng-click="lists.showAddList = true" class="btn waves-effect">Add a list</button>
     <!-- Delete list button -->
-    <input type="button" name="remove_list" value="Delete selected list" ng-click="lists.deleteList(lists.selectedList)">
+    <button type="button" name="add_list" ng-click="lists.deleteList(lists.selectedList)" class="btn waves-effect">Delete selected list</button>
   </form>
   <!-- Add list form -->
   <form ng-if="lists.showAddList" ng-submit="lists.addList(newList)">
-    <label for="addList">Enter new list name:</label>
-    <input ng-model="newList.description" type="text" name="addList">
+    <div input-field>
+      <label for="addList">Enter new list name:</label>
+      <input ng-model="newList.description" type="text" name="addList">
+    </div>
     <!-- submit -->
-    <input type="submit" value="Submit">
+    <button type="submit" name="button" class="btn waves-effect">
+      Submit<i class="material-icons right">send</i>
+    </button>
     <!-- Cancel Adding button -->
-    <button type="button" ng-click="lists.showAddList = false">Cancel Adding</button>
+    <button type="button" name="add_list" ng-click="lists.showAddList = false" class="btn waves-effect">Cancel Adding</button>
   </form>
   <!-- List items -->
-  <ul>
+  <ul class="collection">
     <!-- city -->
-    <li ng-repeat="city in lists.selectedList._cities">
+    <li class="collection-item" ng-repeat="city in lists.selectedList._cities">
       <!-- City display -->
       <span ng-if="!city.showEdit">{{city.description}}</span>
       <!-- Edit form -->
-      <form ng-if="city.showEdit" ng-submit="lists.editCity(city)">
-        <label for="update_city">Enter the updated city name: </label>
-        <input type="text" ng-model="city.description" name="update_city">
-        <input type="submit" name="submit" value="submit" ng-click="city.showEdit = false">
-      </form>
-      <!-- Edit city button -->
-      <button type="button" ng-if="!city.showEdit" ng-click="city.showEdit = true">Edit City</button>
-      <!-- Cancel editing button -->
-      <button type="button" ng-if="city.showEdit" ng-click="city.showEdit = false">Cancel Editing</button>
-      <!-- Remove city button -->
-      <button type="button" ng-click="lists.removeCity(city, lists.selectedList)">Remove city from list</button>
+      <div class="modal" id="edit">
+        <div class="modal-content">
+          <form ng-if="city.showEdit" ng-submit="lists.editCity(city)">
+            <div input-field>
+              <label for="update_city">Enter the updated city name: </label>
+              <input type="text" ng-model="city.description" name="update_city">
+            </div>
+            <!-- Submit button -->
+            <button type="submit" name="button" class="btn waves-effect">
+              Submit<i class="material-icons right">send</i>
+            </button>
+            <!-- Cancel editing button -->
+            <button class="btn small waves-effect" type="button" ng-if="city.showEdit" ng-click="city.showEdit = false">Cancel Editing</button>
+          </form>
+        </div>
+      </div>
+      <div class="secondary-content">
+        <!-- Remove city button -->
+        <a href="" ng-click="lists.removeCity(city, lists.selectedList)"><i class="material-icons">delete_sweep</i>&nbsp&nbsp&nbsp</a>
+        <!-- Edit city button -->
+        <a href="" modal data-target="edit" ng-if="!city.showEdit" ng-click="city.showEdit = true"><i class="material-icons">mode_edit</i>&nbsp&nbsp&nbsp</a>
+      </div>
     </li>
   </ul>
   <!-- Add city form -->
   <div ng-if="lists.showAddCity">
     <form ng-submit="lists.addCity(newCity, lists.selectedList)">
-      <label for="new_city">Enter new city name:</label>
-      <input ng-model="newCity.description" type="text" name="new_city">
-      <input type="submit">
+      <div input-field>
+        <label for="new_city">Enter new city name:</label>
+        <input ng-model="newCity.description" type="text" name="new_city">
+      </div>
+      <button type="submit" name="button" class="btn waves-effect">
+        Submit<i class="material-icons right">send</i>
+      </button>
     </form>
   </div>
   <!-- Add city button -->
-  <button ng-if="lists.selectedList" type="button" ng-click="lists.showAddCity = true">Add a city</button>
+  <button class="btn waves-effect" ng-if="lists.selectedList" type="button" ng-click="lists.showAddCity = true">Add a city</button>
 </div>

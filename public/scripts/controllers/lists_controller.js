@@ -24,6 +24,8 @@ function ListsController($http, $state, $scope){
       .then(function(res){
         city = res.data;
         city.showEdit = false;
+        $('#edit').modal('close');
+        $state.reload();
       })
   }
   self.editCity = editCity;
