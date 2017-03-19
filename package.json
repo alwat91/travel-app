@@ -25,6 +25,9 @@
     "express-session": "^1.15.1",
     "mongoose": "^4.8.7",
     "morgan": "^1.8.1",
-    "request-json": "^0.6.1"
+    "request-json": "^0.6.1",
+    "engines": {
+      "node": "6.9.1"
+    }
   }
 }
