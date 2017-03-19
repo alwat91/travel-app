@@ -1,4 +1,4 @@
-function TripsController($http){
+function TripsController($http, $scope){
   var self = this;
 
   function getCities(){
@@ -12,7 +12,7 @@ function TripsController($http){
 
   function randomTrip(){
     // Randomly select destination
-    self.destination = self.selectedList._cities[Math.floor( Math.random() * self.selectedList._cities.length )];
+    self.destination = $scope.selectedList._cities[Math.floor( Math.random() * $scope.selectedList._cities.length )];
     // Create new city for origin
     $http.post('/cities', self.origin)
       .then(function(res){

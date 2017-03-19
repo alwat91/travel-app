@@ -11,5 +11,7 @@ function HomeController($scope, $http) {
 
   $scope.$on('gotLists', function(event, data){
     self.allLists = data;
+    $scope.allLists = data;
+    $scope.selectedList = self.allLists[0];
   })
 }

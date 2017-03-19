@@ -9,7 +9,7 @@
 <!-- Lists chooser -->
 <div ng-controller="ListsController as lists">
   <label for="destination_list">Select a list to randomly choose from: </label>
-  <select ng-model="trips.selectedList" ng-options="list.description for list in lists.allLists" name="destination_list"></select>
+  <select ng-model="selectedList" ng-options="list as list.description for list in lists.allLists track by list._id" name="destination_list"></select>
 </div>
 <!-- Results block, appears when destination is instansiated -->
 <div ng-if="trips.destination">
