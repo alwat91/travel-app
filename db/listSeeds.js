@@ -24,20 +24,53 @@ router.get('/', function(req, res){
     console.log(err);
   });
   // list to create
-  var list = new List({
+  var everything = new List({
+    description: "Everything",
+    _cities: []
+  })
+
+  var top10 = new List({
     description: "Top 10",
+    _cities: []
+  })
+
+  var pref = new List({
+    description: "Best big cities",
     _cities: []
   })
 
   City.find()
     .then(function(cities){
       console.log("cities", cities);
-      cities.forEach(function(el){
-        list._cities.push(el._id);
+      cities.forEach(function(el, i){
+        everything._cities.push(el._id);
+
+        if (i < 9){
+          top10._cities.push(el._id);
+        }
+        if (i % 2 == 0){
+          pref._cities.push(el._id);
+        }
       })
     })
     .then(function(err){
-      list.save(function(err, list){
+      everything.save(function(err, list){
+        if (err) {
+          console.log(err);
+        }
+        console.log("List created!", list);
+      })
+    })
+    .then(function(err){
+      top10.save(function(err, list){
+        if (err) {
+          console.log(err);
+        }
+        console.log("List created!", list);
+      })
+    })
+    .then(function(err){
+      pref.save(function(err, list){
         if (err) {
           console.log(err);
         }
@@ -50,8 +83,8 @@ router.get('/', function(req, res){
   var user1 = new User({
     email: "a@a.com",
     password_digest: bcrypt.hashSync("a", bcrypt.genSaltSync(10)),
-    destinations: list,
-    already_been: list
+    destinations: everything,
+    already_been: top10
   })
 
   user1.save(function(err){
