@@ -2,6 +2,7 @@ function AuthController($scope, $http, $state){
   var self = this;
 
   function signup(user) {
+    console.log(user);
     $http.post('/users', user)
       .then(function(response) {
         $state.go('login');
@@ -14,7 +15,7 @@ function AuthController($scope, $http, $state){
       .then(function(res){
         console.log(res.data);
         if (res.data.status == 401) {
-          Materialize.toast('Incorrect username or password')
+          Materialize.toast('Incorrect username or password', 4000)
         }
         else {
           $scope.$emit('userLoggedIn', res.data.data)
