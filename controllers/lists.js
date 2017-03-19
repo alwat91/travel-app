@@ -23,7 +23,7 @@ router.post('/', function(req, res){
 
   list.save(function(err, list){
     if(err){ console.log(err); }
-    res.send(list);
+    res.json(list);
   })
 })
 // Remove city from list
