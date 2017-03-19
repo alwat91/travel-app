@@ -11,6 +11,10 @@ function TripsController($http, $scope){
   self.getCities = getCities;
 
   function randomTrip(){
+    // Clear lowest quote so that loading animation will show when button is clicked again
+    if (self.lowestQuote) {
+      self.lowestQuote = null;
+    }
     // Randomly select destination
     self.destination = $scope.selectedList._cities[Math.floor( Math.random() * $scope.selectedList._cities.length )];
     // Create new city for origin
