@@ -3,8 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>Where the heck should I travel?</title>
-    <!-- Angular + UI Router -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+
+    <!--UI Router -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.2/angular-ui-router.min.js"></script>
     <!-- Router -->
     <script src="/scripts/router.js"></script>
@@ -15,17 +20,34 @@
     <script src="scripts/controllers/lists_controller.js"></script>
     <!-- App -->
     <script src="/scripts/app.js"></script>
+    <!-- Materialize Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <!-- style scripts -->
+    <script type="text/javascript" src="scripts/style.js"></script>
   </head>
   <body ng-controller="HomeController as home">
 
     <nav ng-controller="AuthController as auth">
-      <ul>
-        <li ui-sref="index">Home</li>
-        <li ng-if="!home.currentUser" ui-sref="login">Login</li>
-        <li ng-if="!home.currentUser" ui-sref="sign_up">Sign Up</li>
-        <li ng-if="home.currentUser" ng-click="auth.logout()">Logout</li>
-        <li ng-if="home.currentUser" ui-sref="preferences">Preferences</li>
-      </ul>
+      <div class="nav-wrapper">
+        <a ui-sref="index" class="brand-logo"><i class="large material-icons">airplanemode_active</i></a>
+        <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li ui-sref="index">Home</li>
+          <li ng-if="!home.currentUser" ui-sref="login">Login</li>
+          <li ng-if="!home.currentUser" ui-sref="sign_up">Sign Up</li>
+          <li ng-if="home.currentUser" ng-click="auth.logout()">Logout</li>
+          <li ng-if="home.currentUser" ui-sref="preferences">Preferences</li>
+        </ul>
+        <ul class="side-nav" id="mobile-menu">
+          <li ui-sref="index">Home</li>
+          <li ng-if="!home.currentUser"><a href="#" ui-sref="login">Login</a></li>
+          <li ng-if="!home.currentUser"><a href="#" ui-sref="sign_up">Sign Up</a></li>
+          <li ng-if="home.currentUser"><a href="#"  ng-click="auth.logout()">Logout</a></li>
+          <li ng-if="home.currentUser"><a href="#"  ui-sref="preferences">Preferences</a></li>
+        </ul>
+      </div>
     </nav>
 
     <ui-view>

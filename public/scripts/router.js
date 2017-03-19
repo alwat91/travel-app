@@ -1,4 +1,4 @@
-angular.module('travelApp', ['ui.router'])
+angular.module('travelApp', ['ui.router', 'ui.materialize'])
   .config(TravelRouter);
 
   function TravelRouter($stateProvider, $urlRouterProvider){
