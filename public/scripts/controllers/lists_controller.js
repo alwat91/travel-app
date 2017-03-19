@@ -54,4 +54,10 @@ function ListsController($http, $state, $scope){
       })
   }
   self.deleteList = deleteList;
+
+  function cancelEdit(city){
+    city.showEdit = false;
+      $('#edit').modal('close');
+  }
+  self.cancelEdit = cancelEdit;
 }
