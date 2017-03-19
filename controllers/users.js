@@ -39,10 +39,9 @@ router.post('/', authHelpers.createSecure, function(req, res){
     user.destinations = lists
   })
   .then(function(city){
-    user.save();
     console.log(user);
     res.json({status: 200, message: "User created"})
-
+    return user.save();
   })
   .catch(function(err){
     console.log(err);

@@ -11,11 +11,19 @@ var List = require('../models/list.js');
 var User = require('../models/user.js');
 // Get all lists
 router.get('/', function(req, res){
-  List.find()
-  .populate('_cities')
-  .exec(function(err, lists){
-    res.json(lists);
-  })
+  if (req.session.currentUser) {
+    User.findById(req.session.currentUser._id)
+      .then(function(user){
+        res.json(user.destinations)
+      })
+  }
+  else {
+    List.find()
+    .populate('_cities')
+    .exec(function(err, lists){
+      res.json(lists);
+    })
+  }
 });
 // Crete new list
 router.post('/', function(req, res){
