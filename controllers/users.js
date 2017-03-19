@@ -8,7 +8,7 @@ var router = express.Router({mergeParams: true});
 var User = require('../models/user.js');
 var City = require('../models/city.js');
 var authHelpers = require('../helpers/auth.js');
-
+// Create new user
 router.post('/', authHelpers.createSecure, function(req, res){
   var user = new User({
     email: req.body.email,
@@ -18,6 +18,7 @@ router.post('/', authHelpers.createSecure, function(req, res){
   var city = new City({
     description: req.body.origin
   })
+  // Get skyscanner_id for departure city
   client.get(`http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US/?query=${city.description}&apiKey=${process.env.SKYSCANNER_KEY}`)
   .then(function(response) {
     // check to see if the expected response is given

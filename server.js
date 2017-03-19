@@ -1,10 +1,10 @@
-var dotenv = require('dotenv').config();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+// controllers
 var usersController = require('./controllers/users.js');
 var sessionsController = require('./controllers/sessions.js');
 var destinationsController = require('./controllers/destinations.js')

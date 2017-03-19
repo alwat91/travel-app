@@ -17,15 +17,16 @@
     <script src="/scripts/app.js"></script>
   </head>
   <body ng-controller="HomeController as home">
-    <div ng-controller="AuthController as auth">
+
+    <nav ng-controller="AuthController as auth">
       <ul>
         <li ui-sref="index">Home</li>
         <li ng-if="!home.currentUser" ui-sref="login">Login</li>
         <li ng-if="!home.currentUser" ui-sref="sign_up">Sign Up</li>
         <li ng-if="home.currentUser" ng-click="auth.logout()">Logout</li>
-        <li ui-sref="preferences">Preferences</li>
+        <li ng-if="home.currentUser" ui-sref="preferences">Preferences</li>
       </ul>
-    </div>
+    </nav>
 
     <ui-view>
     </ui-view>

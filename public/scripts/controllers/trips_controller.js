@@ -1,4 +1,4 @@
-function TripsController($http, $state){
+function TripsController($http){
   var self = this;
 
   function getCities(){
@@ -11,21 +11,15 @@ function TripsController($http, $state){
   self.getCities = getCities;
 
   function randomTrip(origin){
+    // Get origin json
     self.origin = JSON.parse(origin);
-
-    $http.get('/destinations/random')
-    .then(function(res){
-      self.destination = res.data;
-      getPrice();
-    })
-  }
-  self.randomTrip = randomTrip
-
-  function getPrice(){
+    // Randomly select destination
+    self.destination = self.selectedList._cities[Math.floor( Math.random() * self.selectedList._cities.length )];
+    // Get prices
     $http.get(`/trips/${self.origin.skyscanner_id}/${self.destination.skyscanner_id}`)
     .then(function(res){
-      console.log(res.data);
       self.lowestQuote = res.data;
     })
   }
+  self.randomTrip = randomTrip;
 }

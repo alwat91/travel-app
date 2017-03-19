@@ -7,25 +7,26 @@ var express = require('express');
 var router = express.Router({ mergeParams: true });
 
 var City = require('../models/city.js');
-var List = require('../models/list.js');
-var User = require('../models/user.js');
-
+// City update
 router.put('/:cityId', function(req, res){
+  // Find the city
   City.findById(req.params.cityId)
     .exec(function(err, city){
-      if (err) {
-        console.log(err);
-      }
+      if (err) { console.log(err);}
+      // Update description
       city.description = req.body.description;
       return city
     })
+    // Get skyscanner_id
     .then(function(city){
       client.get(`http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US/?query=${city.description}&apiKey=${process.env.SKYSCANNER_KEY}`, function(err, res, body){
+        // Set skyscanner_id
         city.skyscanner_id = body.Places[0].CityId.slice(0, -4);
         return city;
       })
       return city;
     })
+    // Save the city
     .then(function(city){
       city.save();
       console.log(city);

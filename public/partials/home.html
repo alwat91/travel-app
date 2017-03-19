@@ -1,4 +1,5 @@
-<div ng-if="!home.currentUser || !home.currentUser.preferred_departure">
+<!-- Random trip generation -->
+<div>
   <form ng-submit="trips.randomTrip(origin)">
     <label for="origins">Select a city to depart from:</label>
     <select ng-model="origin" name="origin">
@@ -8,13 +9,17 @@
     <input type="submit" value="Take me somewhere!">
   </form>
 </div>
-
+<!-- Lists chooser -->
 <div ng-controller="ListsController as lists">
-  <select ng-model="lists.allLists" ng-options="list.description for list in lists.allLists" name="destination_list"></select>
+  <label for="destination_list">Select a list to randomly choose from: </label>
+  <select ng-model="trips.selectedList" ng-options="list.description for list in lists.allLists" name="destination_list"></select>
 </div>
-
+<!-- Results block, appears when destination is instansiated -->
 <div ng-if="trips.destination">
   Why don't you go to {{trips.destination.description}}?
   You can find flights for around {{trips.lowestQuote.MinPrice | currency}}
-  Click <a ng-href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/{{trips.origin.skyscanner_id}}/{{trips.destination.skyscanner_id}}/anytime?apiKey=prtl674938798674">here</a> to browse flights
+  Click
+  <!-- Skyscanner link -->
+   <a ng-href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/{{trips.origin.skyscanner_id}}/{{trips.destination.skyscanner_id}}/anytime?apiKey=prtl674938798674">here</a>
+   to browse flights
 </div>
