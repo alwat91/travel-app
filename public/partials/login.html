@@ -1,7 +1,15 @@
-<form ng-submit="auth.login(user)">
-  <label for="email">Email</label>
-  <input ng-model="user.email" type="text" name="email">
-  <label for="password">Password</label>
-  <input ng-model="user.password" type="password" name="password">
-  <input type="Submit">
-</form>
+<div class="container">
+  <form ng-submit="auth.login(user)">
+    <div input-field>
+      <label for="email">Email</label>
+      <input ng-model="user.email" type="text" name="email">
+    </div>
+    <div input-field>
+      <label for="password">Password</label>
+      <input ng-model="user.password" type="password" name="password">
+    </div>
+    <button type="submit" name="button" class="btn waves-effect">
+      Login<i class="material-icons right">send</i>
+    </button>
+  </form>
+</div>

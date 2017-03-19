@@ -14,8 +14,8 @@
     <!-- Router -->
     <script src="/scripts/router.js"></script>
     <!-- Controllers -->
-    <script src="scripts/controllers/auth_controller.js">    </script>
-    <script src="scripts/controllers/home_controller.js">    </script>
+    <script src="scripts/controllers/auth_controller.js"></script>
+    <script src="scripts/controllers/home_controller.js"></script>
     <script src="scripts/controllers/trips_controller.js"></script>
     <script src="scripts/controllers/lists_controller.js"></script>
     <!-- App -->
@@ -31,14 +31,14 @@
 
     <nav ng-controller="AuthController as auth">
       <div class="nav-wrapper">
-        <a ui-sref="index" class="brand-logo"><i class="large material-icons">airplanemode_active</i></a>
+        <a ui-sref="index" class="brand-logo"><i class="large material-icons">airplanemode_active</i>Where the heck should I travel?</a>
         <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li ui-sref="index">Home</li>
-          <li ng-if="!home.currentUser" ui-sref="login">Login</li>
-          <li ng-if="!home.currentUser" ui-sref="sign_up">Sign Up</li>
-          <li ng-if="home.currentUser" ng-click="auth.logout()">Logout</li>
-          <li ng-if="home.currentUser" ui-sref="preferences">Preferences</li>
+          <li ng-if="!home.currentUser"><a ui-sref="login" href="#">Login</a></li>
+          <li ng-if="!home.currentUser"><a ui-sref="sign_up" href="#">Sign Up</a></li>
+          <li ng-if="home.currentUser"><a ng-click="auth.logout()" href="#">Logout</a></li>
+          <li ng-if="home.currentUser"><a ui-sref="preferences" href="#">Preferences</a></li>
         </ul>
         <ul class="side-nav" id="mobile-menu">
           <li ui-sref="index">Home</li>

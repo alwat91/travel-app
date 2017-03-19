@@ -1,22 +1,42 @@
-<!-- Random trip generation -->
-<div>
-  <form ng-submit="trips.randomTrip(origin)">
-    <label for="origins">Enter a city to depart from:</label>
-    <input type="text" name="origin" ng-model="trips.origin.description">
-    <input type="submit" value="Take me somewhere!">
-  </form>
-</div>
-<!-- Lists chooser -->
-<div ng-controller="ListsController as lists">
-  <label for="destination_list">Select a list to randomly choose from: </label>
-  <select ng-model="selectedList" ng-options="list as list.description for list in lists.allLists track by list._id" name="destination_list"></select>
-</div>
-<!-- Results block, appears when destination is instansiated -->
-<div ng-if="trips.destination">
-  Why don't you go to {{trips.destination.description}}?
-  You can find flights for around {{trips.lowestQuote.MinPrice | currency}}
-  Click
-  <!-- Skyscanner link -->
-   <a ng-href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/{{trips.origin.skyscanner_id}}/{{trips.destination.skyscanner_id}}/anytime?apiKey=prtl674938798674">here</a>
-   to browse flights
+<div class="container">
+  <br>
+  <!-- Random trip generation -->
+  <div>
+    <form ng-submit="trips.randomTrip(origin)">
+      <div input-field>
+        <label for="origins">Enter a city to depart from:</label>
+        <input type="text" name="origin" ng-model="trips.origin.description">
+      </div>
+      <button type="submit" name="action" class="btn waves-effect">Take me somewhere!
+        <i class="material-icons right">send</i>
+      </button>
+    </form>
+  </div>
+  <br><br>
+  <!-- Lists chooser -->
+  <div ng-controller="ListsController as lists">
+    <div input-field>
+      <select material-select ng-model="selectedList" ng-options="list as list.description for list in lists.allLists track by list._id" name="destination_list"></select>
+      <label for="destination_list">Select a list to randomly choose from: </label>
+    </div>
+  </div>
+  <!-- Loading animation -->
+  <div class="progress" ng-if="trips.destination && !trips.lowestQuote">
+    <div class="indeterminate"></div>
+  </div>
+  <!-- Results block, appears when destination is instansiated -->
+  <div class="row" ng-if="trips.destination && trips.lowestQuote">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">Results</span>
+          <p>Why don't you go to {{trips.destination.description}}?
+          You can find flights for around {{trips.lowestQuote.MinPrice | currency}}.</p>
+        </div>
+        <div class="card-action">
+          <a ng-href="http://partners.api.skyscanner.net/apiservices/referral/v1.0/US/USD/en-US/{{trips.origin.skyscanner_id}}/{{trips.destination.skyscanner_id}}/anytime?apiKey=prtl674938798674">Browse Flights</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
