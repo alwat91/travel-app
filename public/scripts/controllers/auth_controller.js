@@ -13,8 +13,13 @@ function AuthController($scope, $http, $state){
     $http.post('/sessions/login', user)
       .then(function(res){
         console.log(res.data);
-        $scope.$emit('userLoggedIn', res.data.data)
-        $state.go('index');
+        if (res.data.status == 401) {
+          Materialize.toast('Incorrect username or password')
+        }
+        else {
+          $scope.$emit('userLoggedIn', res.data.data)
+          $state.go('index');
+        }
     })
   }
   self.login = login;
