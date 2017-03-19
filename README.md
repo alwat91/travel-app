@@ -31,6 +31,12 @@ description: "String",
 places_id: "Number"
 ```
 
+## Wireframes
+
+![screen shot 2017-03-19 at 5 14 34 pm](https://cloud.githubusercontent.com/assets/23660271/24084807/9d9453c2-0cc7-11e7-802e-155f285cd664.png)
+![screen shot 2017-03-19 at 5 14 41 pm](https://cloud.githubusercontent.com/assets/23660271/24084810/9f028526-0cc7-11e7-8e19-a944bb04c652.png)
+
+
 ## Challenges
 
 Making server side API calls proved to be more difficult that expected because of the necessity of chaining different promises together. My understanding of promises was not as strong as I thought, but I was able to overcome this issue.
