@@ -7,6 +7,7 @@ var express = require('express');
 var router = express.Router({mergeParams: true});
 var User = require('../models/user.js');
 var City = require('../models/city.js');
+var List = require('../models/list.js');
 var authHelpers = require('../helpers/auth.js');
 // Create new user
 router.post('/', authHelpers.createSecure, function(req, res){
@@ -32,10 +33,16 @@ router.post('/', authHelpers.createSecure, function(req, res){
     }
   })
   .then(function(city){
-    city.save();
-    user.preferred_departure = city;
+    return List.find()
+  })
+  .then(function(lists){
+    user.destinations = lists
+  })
+  .then(function(city){
     user.save();
+    console.log(user);
     res.json({status: 200, message: "User created"})
+
   })
   .catch(function(err){
     console.log(err);
