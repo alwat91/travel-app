@@ -10,13 +10,16 @@ function TripsController($http){
   getCities();
   self.getCities = getCities;
 
-  function randomTrip(origin){
-    // Get origin json
-    self.origin = JSON.parse(origin);
+  function randomTrip(){
     // Randomly select destination
     self.destination = self.selectedList._cities[Math.floor( Math.random() * self.selectedList._cities.length )];
-    // Get prices
-    $http.get(`/trips/${self.origin.skyscanner_id}/${self.destination.skyscanner_id}`)
+    // Create new city for origin
+    $http.post('/cities', self.origin)
+      .then(function(res){
+        self.origin = res.data;
+        // Get prices
+        return $http.get(`/trips/${self.origin.skyscanner_id}/${self.destination.skyscanner_id}`)
+      })
     .then(function(res){
       self.lowestQuote = res.data;
     })

@@ -37,5 +37,18 @@ router.put('/:cityId', function(req, res){
     })
 
 })
+// Create new city
+router.post('/', function(req, res){
+  console.log(req.body);
+  var city = new City(req.body);
+  // Get skyscanner_id
+  client.get(`http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US/?query=${city.description}&apiKey=${process.env.SKYSCANNER_KEY}`)
+    .then(function(skyscannerRes){
+      // Set skyscanner_id
+      city.skyscanner_id = skyscannerRes.body.Places[0].CityId.slice(0, -4);
+      city.save();
+      res.send(city);
+    })
+})
 
 module.exports = router;
