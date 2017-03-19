@@ -14,7 +14,7 @@ var citiesController = require('./controllers/cities.js')
 // Access public directory
 app.use(express.static('public'));
 // Connect to db
-var mongoURI = 'mongodb://localhost/travel-app';
+var mongoURI = process.env.MONGODB_URI || "mongodb://localhost/travel-app";
 mongoose.connect(mongoURI);
 // Middleware
 app.use(bodyParser.json());
