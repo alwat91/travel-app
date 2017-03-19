@@ -24,7 +24,7 @@ router.get('/', function(req, res){
 
 
   // Cities to create for final seed
-  var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK", "Macau, Macau", "Kuala Lumpur, Malaysia", "Shenzhen, China", "New York City, New York", "Antalya, Turkey", "Paris, France"];
+  var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London, UK", "Macau, Macau", "Kuala Lumpur, Malaysia", "Shenzhen, China", "New York City, New York", "Antalya, Turkey", "Paris, France", "Istanbul, Turkey", "Rome, Italy", "Dubai", "Guangzhou, China", "Phuket, Thailand", "Mecca, Saudi Arabia", "Pattaya, Thailand", "Taipei City, Taiwan", "Prague, Czech Republic", "Shanghai, China", "Las Vegas, Nevada", "Miami, Florida", "Barcelona, Spain", "Moscow, Russia", "Beijing, China", "Los Angeles, California", "Budapest, Hungary", "Vienna, Austria", "Amsterdam, Netherlands", "Sofia, Bulgaria", "Madrid, Spain", "Orlando, Florida", "Ho Chi Minh City, Vietnam", "Lima, Peru", "Berlin, Germany", "Tokyo, Japan", "Warsaw, Poland", "Chennai, India", "Cairo, Egypt", "Nairobi, Kenya", "Hangzhou, China", "Milan, Italy", "San Francisco, California", "Buenos Aires, Argentina", "Venice, Italy", "Mexico City, Mexico", "Dublin, Ireland", "Seoul, South Korea", "Mugla, Turkey", "Mumbai, India"];
   // Less cities for testing. Use this to minimize api requests
   // var cities = ["Hong Kong, Hong Kong", "Singapore, Singapore", "Bangkok, Thailand", "London"];
 
