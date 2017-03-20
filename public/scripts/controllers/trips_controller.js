@@ -6,8 +6,11 @@ function TripsController($http, $scope){
     if (self.lowestQuote) {
       self.lowestQuote = null;
     }
-    // Randomly select destination
-    self.destination = $scope.selectedList._cities[Math.floor( Math.random() * $scope.selectedList._cities.length )];
+    // check to make sure destination and origin aren't the same
+    do {
+      // Randomly select destination
+      self.destination = $scope.selectedList._cities[Math.floor( Math.random() * $scope.selectedList._cities.length )];
+    } while (self.destination.description == self.origin.description)
     // Create new city for origin
     $http.post('/cities', self.origin)
       .then(function(res){
