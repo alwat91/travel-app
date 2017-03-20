@@ -11,6 +11,10 @@ function TripsController($http, $scope){
     // Create new city for origin
     $http.post('/cities', self.origin)
       .then(function(res){
+        if(res.data.status == 400){
+          Materialize.toast('Unable to find requested departure city, please try again', 4000);
+          self.destination = null;
+        }
         self.origin = res.data;
         // Get prices
         return $http.get(`/trips/${self.origin.skyscanner_id}/${self.destination.skyscanner_id}`)

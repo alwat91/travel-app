@@ -44,10 +44,17 @@ router.post('/', function(req, res){
   // Get skyscanner_id
   client.get(`http://partners.api.skyscanner.net/apiservices/autosuggest/v1.0/US/USD/en-US/?query=${city.description}&apiKey=${process.env.SKYSCANNER_KEY}`)
     .then(function(skyscannerRes){
+      if(!skyscannerRes.body.Places[0]){
+        res.json({status: 400, statusText: "unable to find city"})
+      }
       // Set skyscanner_id
       city.skyscanner_id = skyscannerRes.body.Places[0].CityId.slice(0, -4);
       city.save();
-      res.send(city);
+      res.json(city);
+    })
+    .catch(function(err){
+      console.log(err);
+      res.json({status: 401, statusText: err})
     })
 })
 
