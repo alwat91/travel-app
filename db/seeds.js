@@ -1,5 +1,5 @@
 // access api keys
-require('dotenv').config();
+// require('dotenv').config();
 // set up request-json
 var request = require('request-json');
 var client = request.createClient('http://localhost:8888/');
