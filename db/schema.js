@@ -6,9 +6,9 @@ mongoose.Promise = global.Promise;
 var CitySchema = new Schema({
   created_at: Date,
   updated_at: Date,
-  description: String,
-  places_id: String,
-  skyscanner_id: String,
+  description: { type: String, sparse: true},
+  places_id: { type: String, sparse: true},
+  skyscanner_id: { type: String, sparse: true},
   location: {
     type: [Number],
     index: '2d'
