@@ -40,7 +40,7 @@
           <li ng-if="home.currentUser"><a ng-click="auth.logout()" href="#">Logout</a></li>
           <li ng-if="home.currentUser"><a ui-sref="preferences" href="#">Preferences</a></li>
         </ul>
-        <ul class="side-nav" id="mobile-menu">
+        <ul class="side-nav" id="mobile-menu" data-closeonclick="true">
           <li ui-sref="index">Home</li>
           <li ng-if="!home.currentUser"><a href="#" ui-sref="login">Login</a></li>
           <li ng-if="!home.currentUser"><a href="#" ui-sref="sign_up">Sign Up</a></li>
