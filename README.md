@@ -1,5 +1,6 @@
 # I need a damn vacation!
 A simple site for generating travel suggestions. Users can randomly generate a suggested travel location based on their desired departure city. Users can also do full CRUD actions on lists to randomly choose destinations from.
+Deployed app: https://i-need-a-damn-vacation.herokuapp.com/
 
 ## ERD
 
