@@ -27,12 +27,17 @@ router.get('/', function(req, res){
 });
 // Crete new list
 router.post('/', function(req, res){
-  var list = new List(req.body);
-
-  list.save(function(err, list){
-    if(err){ console.log(err); }
-    res.json(list);
-  })
+  User.findById(req.session.currentUser._id)
+    .then(function(user){
+      var list = new List(req.body);
+      user.destinations.push(list);
+      res.json(list)
+      return user.save()
+    })
+    .catch(function(err){
+      res.json(err);
+      console.log(err);
+    })
 })
 // Remove city from list
 router.delete('/:listId/:cityId', function(req, res){
