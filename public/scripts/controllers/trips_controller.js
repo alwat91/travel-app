@@ -1,15 +1,6 @@
 function TripsController($http, $scope){
   var self = this;
 
-  function getCities(){
-    $http.get('/destinations')
-    .then(function(res){
-      self.cities = res.data._cities;
-    })
-  }
-  getCities();
-  self.getCities = getCities;
-
   function randomTrip(){
     // Clear lowest quote so that loading animation will show when button is clicked again
     if (self.lowestQuote) {

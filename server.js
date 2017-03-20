@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 // controllers
 var usersController = require('./controllers/users.js');
 var sessionsController = require('./controllers/sessions.js');
-var destinationsController = require('./controllers/destinations.js')
 var tripsController = require('./controllers/trips.js')
 var listsController = require('./controllers/lists.js')
 var citiesController = require('./controllers/cities.js')
@@ -31,7 +30,6 @@ app.use(session({
 // Controllers
 app.use('/users', usersController);
 app.use('/sessions', sessionsController);
-app.use('/destinations', destinationsController);
 app.use('/trips', tripsController);
 app.use('/lists', listsController);
 app.use('/cities', citiesController);
