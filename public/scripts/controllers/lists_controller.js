@@ -4,6 +4,7 @@ function ListsController($http, $state, $scope){
   function getAllLists(){
     $http.get('/lists/')
       .then(function(res){
+        console.log(res.data);
         self.allLists = res.data;
         $scope.$emit('gotLists', self.allLists);
       })

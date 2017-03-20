@@ -12,10 +12,39 @@ var User = require('../models/user.js');
 // Get all lists
 router.get('/', function(req, res){
   if (req.session.currentUser) {
-    User.findById(req.session.currentUser._id)
-      .then(function(user){
-        res.json(user.destinations)
-      })
+    // Solution from https://github.com/Automattic/mongoose/issues/601
+    User.findOne({ id: req.session.currentUser._id }, {destinations: 0} function(err, parent){
+      if(err || !parent) return next(new Error("Parent not found: " + parentId));
+
+      List.find({parent: parent._id})
+    })
+    // User.findById(req.session.currentUser._id)
+    //   .then(function(user){
+    //     user.destinations.forEach(function(listId, i){
+    //       List.findById(listId)
+    //         .exec(function(err, list){
+    //           user.destinations[i] = list;
+    //         })
+    //     })
+    //   })
+    //   .then(function(user){
+    //     console.log(user);
+    //   })
+    //   .catch(function(err){
+    //     console.log(err);
+    //     res.json(err);
+    //   })
+    // User.findById(req.session.currentUser._id)
+    //   .exec(function(err, user){
+    //     if(err){ console.log(err); }
+    //     console.log(user);
+    //     user.destinations
+    //     .populate('_cities')
+    //     .exec(function(err, destinations){
+    //       if(err){ console.log(err);}
+    //       res.json(user.destinations)
+    //     })
+    //   })
   }
   else {
     List.find()
@@ -41,7 +70,7 @@ router.post('/', function(req, res){
 })
 // Remove city from list
 router.delete('/:listId/:cityId', function(req, res){
-  List.findById(req.params.listId)
+  User.destinations.findById(req.params.listId)
     .exec(function(err, list){
       if (err) {
         console.log(err);
@@ -50,8 +79,10 @@ router.delete('/:listId/:cityId', function(req, res){
       var index = list._cities.indexOf(req.params.cityId);
       // Remove city id from cities array
       list._cities.splice(index, 1);
-      list.save();
-      res.json({status: 200, statusText: "OK"});
+      list.save(function(err, list){
+        if(err){ console.log(err); }
+        res.json({status: 200, statusText: "OK"});
+      });
     })
 });
 // Add city to list
